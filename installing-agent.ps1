@@ -1,3 +1,4 @@
+Try {
 # Import File
 #$Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
 
@@ -87,4 +88,8 @@ $Params = @{
 
 # Sending by http
 Invoke-RestMethod @Params
+} Catch {
+ "I can log a friendly description of the error here, or log the error:" | Out-File $LogErrors -Append
+        $_ | Out-File $LogErrors -Append
 
+}
