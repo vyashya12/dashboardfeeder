@@ -1,5 +1,5 @@
 # Import File
-$Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
+#$Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
 
 # Get the server hostname
 $hostname = (Get-WmiObject Win32_ComputerSystem).Name
@@ -51,13 +51,13 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
 }
 
 # Retrieve Important Strings
-$RESTAPIUser = $Credentials.UserName
-$RESTAPIPassword = $Credentials.GetNetworkCredential().Password
+#$RESTAPIUser = $Credentials.UserName
+#$RESTAPIPassword = $Credentials.GetNetworkCredential().Password
 
 # Building body to send via http
 $body = @{
-    'APIUser' = $RESTAPIUser
-    'APIPassword' = $RESTAPIPassword
+    #'APIUser' = $RESTAPIUser
+    #'APIPassword' = $RESTAPIPassword
     'ServerName' = $hostname	
     'IP' = $ip
     'Drive' = $driveLetter
