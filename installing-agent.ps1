@@ -1,10 +1,10 @@
-Try {
+[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
+
 # Import File
-#$Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
+$Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
 
 # Get the server hostname
 $hostname = (Get-WmiObject Win32_ComputerSystem).Name
-#$outputFilePath = "C:\exabytes\script\$hostname.csv"
 $ip = (Test-Connection -ComputerName (hostname) -Count 1).IPV4Address.IPAddressToString
 
 $os = Get-WmiObject -Class Win32_OperatingSystem
@@ -52,13 +52,14 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
 }
 
 # Retrieve Important Strings
-#$RESTAPIUser = $Credentials.UserName
-#$RESTAPIPassword = $Credentials.GetNetworkCredential().Password
+$RESTAPIUser = $Credentials.UserName
+$RESTAPIPassword = $Credentials.GetNetworkCredential().Password
+
 
 # Building body to send via http
 $body = @{
-    #'APIUser' = $RESTAPIUser
-    #'APIPassword' = $RESTAPIPassword
+    'APIUser' = $RESTAPIUser
+    'APIPassword' = $RESTAPIPassword
     'ServerName' = $hostname	
     'IP' = $ip
     'Drive' = $driveLetter
@@ -73,6 +74,7 @@ $body = @{
     'OfflineVPS' = $offlineVMCount
     'LastUpdate' = $time
     'ServerUptime' = $uptime.Days
+
 }
 
 # Needs to be converted to JSON
@@ -88,8 +90,4 @@ $Params = @{
 
 # Sending by http
 Invoke-RestMethod @Params
-} Catch {
- "I can log a friendly description of the error here, or log the error:" | Out-File $LogErrors -Append
-        $_ | Out-File $LogErrors -Append
 
-}
