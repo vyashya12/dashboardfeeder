@@ -1,5 +1,5 @@
 # Import File
-cd /
+cd /SecureString/
 $Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
 
 # Get the server hostname
