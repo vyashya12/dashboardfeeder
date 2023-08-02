@@ -56,21 +56,22 @@ $RESTAPIPassword = $Credentials.GetNetworkCredential().Password
 
 # Building body to send via http
 $body = @{
-    "APIPassword" = "g1paGwcmEYsVlQEKNyfgFwqvj"
-    "ServerName"= "CoolServerhahahahha"
-    "IP"= "127.0.0.1.00"
-    "Drive"= "V"
-    "Size"= "30"
-    "SizeFree"= "31.40"
-    "SizeUsed"= "43.20"
-    "PercentFree"= "42"
-    "TotalMemory"= "7.78"
-    "FreeMemory"= "2.2"   
-    "UsedMemory"= "5.6"
-    "OnlineVPS"= "3"
-    "OfflineVPS"= "2"
-    "LastUpdate"= "1212"
-    "ServerUptime"= "29"
+    "APIUser" = $RESTAPIUser
+    "APIPassword" = $RESTAPIPassword
+    "ServerName" = $hostname	
+    "IP" = $ip
+    "Drive" = $driveLetter
+    "Size" = $sizeGB
+    "SizeFree" = $freeGB
+    "SizeUsed" = $usedGB
+    "PercentFree" = $percentFree
+    "TotalMemory" = $totalMemoryGB
+    "FreeMemory" = $freeMemoryGB    
+    "UsedMemory" = $usedMemoryGB
+    "OnlineVPS" = $onlineVMCount
+    "OfflineVPS" = $offlineVMCount
+    "LastUpdate" = $time
+    "ServerUptime" = $uptime.Days
 }
 
 # Needs to be converted to JSON
