@@ -1,4 +1,5 @@
 # Import File
+# cd /
 $Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
 
 # Get the server hostname
@@ -32,7 +33,7 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
     }
 
     [PSCustomObject]@{
-        ServerName = $hostname
+        ServerName = $pwd
         IP = $ip
         DriveLetter = $driveLetter
         Size = $sizeGB
