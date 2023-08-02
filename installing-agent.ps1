@@ -57,7 +57,7 @@ $RESTAPIPassword = $Credentials.GetNetworkCredential().Password
 # Building body to send via http
 $body = @{
     "APIPassword" = "g1paGwcmEYsVlQEKNyfgFwqvj"
-    "ServerName"= "Acer-Aoi"	
+    "ServerName"= $hostname	
     "IP"= "127.0.0.1.00"
     "Drive"= "V"
     "Size"= "74.60"
