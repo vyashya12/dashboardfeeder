@@ -69,7 +69,7 @@ $body = @{
     "UsedMemory"= "5.6"
     "OnlineVPS"= "3"
     "OfflineVPS"= "2"
-    "LastUpdate"= $time
+    "LastUpdate"= "1212"
     "ServerUptime"= "29"
 }
 
