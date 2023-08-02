@@ -1,4 +1,3 @@
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 # Import File
 $Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
 
@@ -87,4 +86,5 @@ $Params = @{
 }
 
 # Sending by http
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Invoke-RestMethod @Params
