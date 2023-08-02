@@ -12,6 +12,7 @@ else {
     Get-Credential -Credential (Get-Credential) | Export-Clixml "C:\SecureString\SecureCredentials.xml"
     # Install scheduled task 
     # Create a new scheduled task action to download and run the script
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/vyashya12/dashboardfeeder/main/installing-agent.ps1'))"
 
     # Create a new trigger to run the task daily at 12am
