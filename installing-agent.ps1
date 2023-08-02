@@ -33,7 +33,7 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
     }
 
     [PSCustomObject]@{
-        ServerName = $pwd
+        ServerName = $hostname
         IP = $ip
         DriveLetter = $driveLetter
         Size = $sizeGB
@@ -59,7 +59,7 @@ $RESTAPIPassword = $Credentials.GetNetworkCredential().Password
 $body = @{
     "APIUser" = $RESTAPIUser
     "APIPassword" = $RESTAPIPassword
-    "ServerName" = $hostname	
+    "ServerName" = $pwd
     "IP" = $ip
     "Drive" = $driveLetter
     "Size" = $sizeGB
