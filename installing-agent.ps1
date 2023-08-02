@@ -1,10 +1,9 @@
-[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
-
 # Import File
 $Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
 
 # Get the server hostname
 $hostname = (Get-WmiObject Win32_ComputerSystem).Name
+#$outputFilePath = "C:\exabytes\script\$hostname.csv"
 $ip = (Test-Connection -ComputerName (hostname) -Count 1).IPV4Address.IPAddressToString
 
 $os = Get-WmiObject -Class Win32_OperatingSystem
@@ -55,7 +54,6 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
 $RESTAPIUser = $Credentials.UserName
 $RESTAPIPassword = $Credentials.GetNetworkCredential().Password
 
-
 # Building body to send via http
 $body = @{
     'APIUser' = $RESTAPIUser
@@ -74,7 +72,6 @@ $body = @{
     'OfflineVPS' = $offlineVMCount
     'LastUpdate' = $time
     'ServerUptime' = $uptime.Days
-
 }
 
 # Needs to be converted to JSON
