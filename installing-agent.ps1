@@ -1,3 +1,4 @@
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 # Import File
 $Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
 
