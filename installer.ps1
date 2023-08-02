@@ -1,4 +1,4 @@
-$taskName = "Dashboard Data Collector"
+$taskName = "Dashboard-Collector"
 $task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
 
 if ($task -ne $null) {
