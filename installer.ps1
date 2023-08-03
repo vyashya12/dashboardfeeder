@@ -19,5 +19,5 @@ else {
     $trigger = New-ScheduledTaskTrigger -Daily -At 12am
 
     # Register the scheduled task with the Task Scheduler
-    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -User "SYSTEM" -RunLevel Highest  
+    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -User "Administrator" -RunLevel Highest  
 }
