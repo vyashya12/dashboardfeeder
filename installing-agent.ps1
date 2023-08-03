@@ -2,6 +2,7 @@
 $Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
 $RESTAPIUser = $Credentials.UserName
 $RESTAPIPassword = $Credentials.GetNetworkCredential().Password
+$apicred = (New-Object PSCredential “server_user”,$Credentials.password).GetNetworkCredential().Password
 
 # Get the server hostname
 $hostname = (Get-WmiObject Win32_ComputerSystem).Name
@@ -48,14 +49,14 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
         TotalMemory = $totalMemoryGB
         LastUpdate = $time
         ServerUptime = $uptime.Days
-        
+        APIPassword = $apicred
     }
 }
 
 # Building body to send via http
 $body = @{
     "APIUser" = $RESTAPIUser
-    "APIPassword" = $RESTAPIPassword
+    "APIPassword" = $apicred
     "ServerName" = $hostname
     "IP" = $ip
     "Drive" = $driveLetter
