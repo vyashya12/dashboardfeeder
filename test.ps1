@@ -2,7 +2,7 @@
 <Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
   <RegistrationInfo>
     <Date>2023-08-03T16:36:12.9124953</Date>
-    <Author>549-VM-820\Administrator</Author>
+    <Author>SYSTEM</Author>
     <URI>\Credentials-Creation</URI>
   </RegistrationInfo>
   <Triggers>
