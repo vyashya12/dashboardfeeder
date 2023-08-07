@@ -26,6 +26,6 @@ else {
     $triggerCred = New-ScheduledTaskTrigger -Once -At (Get-Date).AddSeconds(5)
 
     # Register the scheduled task with the Task Scheduler
-    Register-ScheduledTask -TaskName $taskString -Action $actionCred -Trigger $triggerCred -User "SYSTEM" -RunLevel Highest  
+    Register-ScheduledTask -TaskName $taskName -Action $actionCred -Trigger $triggerCred -User "SYSTEM" -RunLevel Highest  
 
 }
