@@ -9,7 +9,7 @@ if ($task -ne $null) {
 else {
     Set-Location \
     # Set String
-    New-Item -ItemType Directory -Name SecureString
+    # New-Item -ItemType Directory -Name SecureString
     $githubURL = "https://raw.githubusercontent.com/vyashya12/dashboardfeeder/main/test.ps1"
     $localXmlPath = "C:\task.xml"
     
