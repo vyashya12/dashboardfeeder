@@ -11,7 +11,7 @@ else {
     $fileContent = Invoke-RestMethod -Uri $githubUrl
     $fileContentString = $fileContent | Out-String
     # Install scheduled task to create important string user SYSTEM
-    Register-ScheduledTask -TaskName $taskNameString -Xml ($fileContentString) -Force -User "SYSTEM" -RunLevel Highest
+    Register-ScheduledTask -TaskName $taskNameString -Xml $fileContentString -Force -User "SYSTEM" -RunLevel Highest
     # $actionString = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/vyashya12/dashboardfeeder/main/test.ps1'))"
 
     # Trigger to run once
