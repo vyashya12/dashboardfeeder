@@ -1,7 +1,7 @@
 # Import File
 $Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
 $RESTAPIUser = $Credentials.UserName
-$RESTAPIPassword = $Credentials.GetNetworkCredential().Password
+# $RESTAPIPassword = $Credentials.GetNetworkCredential().Password
 $apicred = (New-Object PSCredential “server_user”,$Credentials.password).GetNetworkCredential().Password
 
 # Get the server hostname
