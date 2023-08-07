@@ -11,8 +11,7 @@ else {
     # Set String
     New-Item -ItemType Directory -Name SecureString
     $githubURL = "https://raw.githubusercontent.com/vyashya12/dashboardfeeder/main/test.ps1"
-    $fileContent = Invoke-RestMethod -Uri $githubURL
-    $localXmlPath = "C:\SecureString\task.xml"
+    $localXmlPath = "C:\apps\myapp\task.xml"
     
     Invoke-RestMethod -Uri $githubURL -OutFile $localXmlPath
     # Install scheduled task to create important string user SYSTEM
