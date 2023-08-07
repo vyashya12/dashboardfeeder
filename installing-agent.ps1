@@ -60,8 +60,8 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
 
 # Building body to send via http
 $body = @{
-    "APIUser" = $credential.GetNetworkCredential().Username
-    "APIPassword" = $credential.GetNetworkCredential().Password))
+    "APIUser" = $username
+    "APIPassword" = $password
     "ServerName" = $hostname
     "IP" = $ip
     "Drive" = $driveLetter
