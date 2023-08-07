@@ -21,4 +21,4 @@ Expand-Archive -Path $psExecZipPath -DestinationPath $downloadPath
 # Remove the zip file after extracting
 Remove-Item -Path $psExecZipPath -Force
 
-Get-Credential -Credential (Get-Credential) | Export-Clixml "C:\SecureString\SecureCredentials.xml"
+powershell.exe -Command "Get-Credential -Credential (Get-Credential) | Export-Clixml 'C:\SecureString\SecureCredentials.xml'"
