@@ -16,7 +16,7 @@ $uptime = (Get-Date) - ($os.ConvertToDateTime($os.LastBootUpTime))
 #$offlineVMCount = (Get-VM | Where { $_.State -eq Off }).Count
 
 $username = "server_user"
-$password = "16ef4c840068267820ccdce99c9b05b6079ca413b9e1d7982b15684034467729"
+$password = "7mfgMG378u46Xz8QuKvnm8D5AcZMLL"
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential($username, $securePassword)
 
