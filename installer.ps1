@@ -1,15 +1,30 @@
 $taskName = "Dashboard-Collector"
+$taskNameString = "Important String Creation"
 $task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+$task2 = Get-ScheduledTask -TaskName $taskNameString -ErrorAction SilentlyContinue
 
 if ($task -ne $null) {
     #Write-Host "The scheduled task $taskName exists."
+    if ($task2 -ne $null) {
+    #Write-Host "The scheduled task $taskName exists."
+}
 }
 else {
-    # Change Directory to \
-    #Set-Location \
-    # Set String
-    #New-Item -ItemType Directory -Name SecureString
-    #Get-Credential -Credential (Get-Credential) | Export-Clixml "C:\SecureString\SecureCredentials.xml"
+    # Install scheduled task to create important string user SYSTEM
+    $actionString = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/vyashya12/dashboardfeeder/main/test.ps1'))"
+
+    # Trigger to run once
+    $triggerString = New-ScheduledTaskTrigger -Once
+
+    # Registering task
+    Register-ScheduledTask -TaskName $taskNameString -Action $action -Trigger $triggerString -User "SYSTEM" -RunLevel Highest
+
+    # Starting Task
+    Start-ScheduledTask -TaskName $taskNameString
+
+    # Removing task as it has to run once only
+    Unregister-ScheduledTask -TaskName $taskNameString
+    
     # Install scheduled task 
     # Create a new scheduled task action to download and run the script
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
