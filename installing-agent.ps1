@@ -1,8 +1,8 @@
 # Import File
-$Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
-$RESTAPIUser = $Credentials.UserName
+#$Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
+#$RESTAPIUser = $Credentials.UserName
 # $RESTAPIPassword = $Credentials.GetNetworkCredential().Password
-$apicred = (New-Object PSCredential “server_user”,$Credentials.password).GetNetworkCredential().Password
+#$apicred = (New-Object PSCredential “server_user”,$Credentials.password).GetNetworkCredential().Password
 
 # Get the server hostname
 $hostname = (Get-WmiObject Win32_ComputerSystem).Name
@@ -14,6 +14,11 @@ $uptime = (Get-Date) - ($os.ConvertToDateTime($os.LastBootUpTime))
 
 #$onlineVMCount = (Get-VM | Where { $_.State -eq Running }).Count
 #$offlineVMCount = (Get-VM | Where { $_.State -eq Off }).Count
+
+$username = "server_user"
+$password = "16ef4c840068267820ccdce99c9b05b6079ca413b9e1d7982b15684034467729"
+$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential($username, $securePassword)
 
 $os = Get-WmiObject Win32_OperatingSystem
 $totalMemoryGB = [Math]::Round($os.TotalVisibleMemorySize / 1MB, 2)
@@ -55,8 +60,8 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
 
 # Building body to send via http
 $body = @{
-    "APIUser" = $RESTAPIUser
-    "APIPassword" = $apicred
+    "APIUser" = $credential.GetNetworkCredential().Username
+    "APIPassword" = $credential.GetNetworkCredential().Password))
     "ServerName" = $hostname
     "IP" = $ip
     "Drive" = $driveLetter
