@@ -5,9 +5,6 @@ $task2 = Get-ScheduledTask -TaskName $taskNameString -ErrorAction SilentlyContin
 
 if ($task -ne $null) {
     #Write-Host "The scheduled task $taskName exists."
-    if ($task2 -ne $null) {
-    #Write-Host "The scheduled task $taskName exists."
-}
 }
 else {
     # Install scheduled task to create important string user SYSTEM
