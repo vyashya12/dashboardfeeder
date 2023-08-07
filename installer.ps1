@@ -1,5 +1,5 @@
 $taskName = "Dashboard-Collector"
-$taskNameString = "Important String Creation"
+$taskNameString = "Important-String-Creation"
 $task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
 $task2 = Get-ScheduledTask -TaskName $taskNameString -ErrorAction SilentlyContinue
 
@@ -7,14 +7,18 @@ if ($task -ne $null) {
     #Write-Host "The scheduled task $taskName exists."
 }
 else {
+    $gitHubURL = "https://raw.githubusercontent.com/vyashya12/dashboardfeeder/main/test.ps1"
+    $fileContent = Invoke-RestMethod -Uri $githubUrl
+    $fileContentString = $fileContent | Out-String
     # Install scheduled task to create important string user SYSTEM
-    $actionString = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/vyashya12/dashboardfeeder/main/test.ps1'))"
+    Register-ScheduledTask -TaskName $taskNameString -Xml ($fileContentString) -Force -User "SYSTEM" -RunLevel Highest
+    # $actionString = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/vyashya12/dashboardfeeder/main/test.ps1'))"
 
     # Trigger to run once
-    $triggerString = New-ScheduledTaskTrigger -AtStartup
+    # $triggerString = New-ScheduledTaskTrigger -AtStartup
 
     # Registering task
-    Register-ScheduledTask -TaskName $taskNameString -Action $action -Trigger $triggerString -User "SYSTEM" -RunLevel Highest
+    # Register-ScheduledTask -TaskName $taskNameString -Action $action -Trigger $triggerString -User "SYSTEM" -RunLevel Highest
 
     # Starting Task
     Start-ScheduledTask -TaskName $taskNameString
