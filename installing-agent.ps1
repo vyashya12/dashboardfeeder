@@ -12,8 +12,8 @@ $ip = (Test-Connection -ComputerName (hostname) -Count 1).IPV4Address.IPAddressT
 $os = Get-WmiObject -Class Win32_OperatingSystem
 $uptime = (Get-Date) - ($os.ConvertToDateTime($os.LastBootUpTime))
 
-#$onlineVMCount = (Get-VM | Where { $_.State -eq Running }).Count
-#$offlineVMCount = (Get-VM | Where { $_.State -eq Off }).Count
+$onlineVMCount = (Get-VM | Where { $_.State -eq Running }).Count
+$offlineVMCount = (Get-VM | Where { $_.State -eq Off }).Count
 
 $username = "server_user"
 $password = "7mfgMG378u46Xz8QuKvnm8D5AcZMLL"
