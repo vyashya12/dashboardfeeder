@@ -32,8 +32,6 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
         $percentFree = "N/A"
     }
 
-    if ($onlineVMCount -eq
-
     [PSCustomObject]@{
         ServerName = $hostname
         IP = $ip
