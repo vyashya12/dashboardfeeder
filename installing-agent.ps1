@@ -1,19 +1,12 @@
-# Import File
-#$Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
-#$RESTAPIUser = $Credentials.UserName
-# $RESTAPIPassword = $Credentials.GetNetworkCredential().Password
-#$apicred = (New-Object PSCredential “server_user”,$Credentials.password).GetNetworkCredential().Password
-
 # Get the server hostname
 $hostname = (Get-WmiObject Win32_ComputerSystem).Name
-#$outputFilePath = "C:\exabytes\script\$hostname.csv"
 $ip = (Test-Connection -ComputerName (hostname) -Count 1).IPV4Address.IPAddressToString
 
 $os = Get-WmiObject -Class Win32_OperatingSystem
 $uptime = (Get-Date) - ($os.ConvertToDateTime($os.LastBootUpTime))
 
-$onlineVMCount = (Get-VM | Where { $_.State -eq Running }).Count
-$offlineVMCount = (Get-VM | Where { $_.State -eq Off }).Count
+$onlineVMCount = (Get-VM | Where { $_.State -eq 'Running' }).Count
+$offlineVMCount = (Get-VM | Where { $_.State -eq 'Off' }).Count
 
 $username = "server_user"
 $password = "7mfgMG378u46Xz8QuKvnm8D5AcZMLL"
@@ -38,6 +31,8 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
     } else {
         $percentFree = "N/A"
     }
+
+    if ($onlineVMCount -eq
 
     [PSCustomObject]@{
         ServerName = $hostname
