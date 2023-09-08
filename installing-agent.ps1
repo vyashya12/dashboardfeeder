@@ -77,7 +77,7 @@ $JsonBody = $body | ConvertTo-Json
 # API call paramaters(Required*)
 $Params = @{
     Method = 'Post'
-    Uri = 'https://api.vyashya.com/api/servers/'
+    Uri = 'https://hub.vyashya.com/api/servers/'
     Body = $JsonBody
     ContentType = 'application/json'
 }
