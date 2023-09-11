@@ -1,15 +1,22 @@
+# Import File
+#$Credentials = IMPORT-CLIXML "C:\SecureString\SecureCredentials.xml"
+#$RESTAPIUser = $Credentials.UserName
+# $RESTAPIPassword = $Credentials.GetNetworkCredential().Password
+#$apicred = (New-Object PSCredential â€œserver_userâ€,$Credentials.password).GetNetworkCredential().Password
+
 # Get the server hostname
 $hostname = (Get-WmiObject Win32_ComputerSystem).Name
+#$outputFilePath = "C:\exabytes\script\$hostname.csv"
 $ip = (Test-Connection -ComputerName (hostname) -Count 1).IPV4Address.IPAddressToString
 
 $os = Get-WmiObject -Class Win32_OperatingSystem
 $uptime = (Get-Date) - ($os.ConvertToDateTime($os.LastBootUpTime))
 
-$onlineVMCount = (Get-VM | Where { $_.State -eq 'Running' }).Count
-$offlineVMCount = (Get-VM | Where { $_.State -eq 'Off' }).Count
+#$onlineVMCount = (Get-VM | Where { $_.State -eq Running }).Count
+#$offlineVMCount = (Get-VM | Where { $_.State -eq Off }).Count
 
 $username = "server_user"
-$password = "7mfgMG378u46Xz8QuKvnm8D5AcZMLL"
+$password = "g1paGwcmEYsVlQEKNyfgFwqvj"
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential($username, $securePassword)
 
@@ -40,8 +47,8 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
         Free = $freeGB
         Used = $usedGB
         PercentFree = $percentFree
-        OnlineVPS = $onlineVMCount
-        OfflineVPS = $offlineVMCount
+        OnlineVPS = 0
+        OfflineVPS = 0
         UsedMemory = $usedMemoryGB
         FreeMemory = $freeMemoryGB
         TotalMemory = $totalMemoryGB
@@ -65,8 +72,8 @@ $body = @{
     "TotalMemory" = $totalMemoryGB
     "FreeMemory" = $freeMemoryGB    
     "UsedMemory" = $usedMemoryGB
-    "OnlineVPS" = $onlineVMCount
-    "OfflineVPS" = $offlineVMCount
+    "OnlineVPS" = 0
+    "OfflineVPS" = 0
     "LastUpdate" = $time
     "ServerUptime" = $uptime.Days
 }
@@ -77,7 +84,7 @@ $JsonBody = $body | ConvertTo-Json
 # API call paramaters(Required*)
 $Params = @{
     Method = 'Post'
-    Uri = 'https://hub.vyashya.com/api/servers/'
+    Uri = 'https://hub.vyashya.com/api/servers/add'
     Body = $JsonBody
     ContentType = 'application/json'
 }
