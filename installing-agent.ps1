@@ -47,8 +47,8 @@ $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (Driv
         Free = $freeGB
         Used = $usedGB
         PercentFree = $percentFree
-        OnlineVPS = 0
-        OfflineVPS = 0
+        OnlineVPS = $onlineVMCount
+        OfflineVPS = $offlineVMCount
         UsedMemory = $usedMemoryGB
         FreeMemory = $freeMemoryGB
         TotalMemory = $totalMemoryGB
