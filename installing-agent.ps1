@@ -95,7 +95,6 @@ for ($i = 0; $i -lt $DriveLetters.Count; $i++) {
         ServerUptime = $uptime.Days
         APIPassword = $apicred
     }
-}
 
 # Building body to send via http
 $body = @{
