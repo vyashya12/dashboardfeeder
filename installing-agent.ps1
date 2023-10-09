@@ -29,7 +29,6 @@ $time = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 # Get the free disk space for C and D drives
 $partitions = Get-WmiObject -Class Win32_Volume -Filter "DriveType = 3 AND (DriveLetter = 'C:' OR DriveLetter = 'D:')" | ForEach-Object {
-    $driveLetter = $_.DriveLetter
     $sizeGB = "{0:N2}" -f ($_.Capacity / 1GB)
     $freeGB = "{0:N2}" -f ($_.FreeSpace / 1GB)
     $usedGB = "{0:N2}" -f (($_.Capacity - $_.FreeSpace) / 1GB)
