@@ -12,8 +12,8 @@ $ip = (Test-Connection -ComputerName (hostname) -Count 1).IPV4Address.IPAddressT
 $os = Get-WmiObject -Class Win32_OperatingSystem
 $uptime = (Get-Date) - ($os.ConvertToDateTime($os.LastBootUpTime))
 
-#$onlineVMCount = (Get-VM | Where { $_.State -eq 'Running' }).Count
-#$offlineVMCount = (Get-VM | Where { $_.State -eq 'Off' }).Count
+$onlineVMCount = (Get-VM | Where { $_.State -eq 'Running' }).Count
+$offlineVMCount = (Get-VM | Where { $_.State -eq 'Off' }).Count
 
 $username = "server_user"
 $password = "g1paGwcmEYsVlQEKNyfgFwqvj"
@@ -93,8 +93,8 @@ for ($i = 0; $i -lt $DriveLetters.Count; $i++) {
         Free = $freeGB
         Used = $usedGB
         PercentFree = $allPercentage
-        OnlineVPS = 0
-        OfflineVPS = 0
+        OnlineVPS = $onlineVMCount
+        OfflineVPS = $offlineVMCount
         UsedMemory = $allUsed
         FreeMemory = $allRemaining
         TotalMemory = $allTotal
@@ -118,8 +118,8 @@ $body = @{
     "TotalMemory" = $allTotal
     "FreeMemory" = $allRemaining    
     "UsedMemory" = $allUsed
-    "OnlineVPS" = 0
-    "OfflineVPS" = 0
+    "OnlineVPS" = $onlineVMCount
+    "OfflineVPS" = $offlineVMCount
     "LastUpdate" = $time
     "ServerUptime" = $uptime.Days
 }
