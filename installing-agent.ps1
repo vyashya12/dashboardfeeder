@@ -118,8 +118,8 @@ $body = @{
     "TotalMemory" = $allTotal
     "FreeMemory" = $allRemaining    
     "UsedMemory" = $allUsed
-    "OnlineVPS" = $onlineVMCount
-    "OfflineVPS" = $offlineVMCount
+    "OnlineVPS" = 0
+    "OfflineVPS" = 0
     "LastUpdate" = $time
     "ServerUptime" = $uptime.Days
 }
